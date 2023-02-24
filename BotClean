@@ -42,7 +42,7 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                     dist.append(tup(tot, horz, vert))       
                 
         min_dist = min(dist)
-        nearest = 
+        
         
         for tot, horz, vert in nearest:
             
