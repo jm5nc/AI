@@ -24,6 +24,21 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                     horz = posr - i
                     vert = posc - j
                     tot = abs(horz) + abs(vert)
+                    
+                    if tot == 1:  #added to try and catch the easy cases faster
+                        if abs(horz) == 1:
+                            if horz < 0:
+                                move = "RIGHT"
+                            else:
+                                move = "LEFT"
+                        else:
+                            if vert < 0:
+                                move = "DOWN"
+                            else:
+                                move = "UP"
+                        print(move)
+                        return(move)
+                            
                     dist.append(tup(tot, horz, vert))       
                 
         min_dist = min(dist)
