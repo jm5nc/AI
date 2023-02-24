@@ -13,9 +13,8 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
     
     if board[posr][posc] == "d":
         print('CLEAN')
-        
+       
     else:
-        
         dist = []
         flag = 0
         
@@ -28,21 +27,22 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                     
                     dist.append([tot, horz, vert])   
                     
-                    if tot == 1:  #added to try and catch the easy cases faster
+                    if tot == 1 and flag ==0:  #added to try and catch the easy cases faster
                         if abs(horz) == 1:
-                            if horz < 0:
+                            if horz < 0 and posc < 5:
                                 move = "DOWN"
                             else:
+                                #if posc > 0:
                                 move = "UP"
                         else:
-                            if vert < 0:
+                            if vert < 0 and posr < 5:
                                 move = "RIGHT"
                             else:
-                                move = "LEFT"
+                                if posr > 0:
+                                    move = "LEFT"
                         print(move)
                         flag = 1
-                        break    
-        
+                        break   
         
         if flag == 0:
             nearest = sorted(dist)[0]
@@ -50,7 +50,8 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
             horz = nearest[1]
             vert = nearest[2]
             
-            if abs(horz) <= abs(vert) and horz != 0:
+            
+            if abs(horz) > abs(vert):
                 if horz < 0:
                     move = "DOWN"
                 elif horz > 0:
@@ -58,11 +59,11 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                     
             else:
                 if vert < 0:
-                    move = "RIGHT"
+                    move = "RIGHT" 
                 elif vert > 0:
                     move = "LEFT"
                 else:
-                    move = "Didn't I already tell you to clean?"
+                    move = "Why you here?" 
                     
             print(move)
                     
