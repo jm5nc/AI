@@ -39,9 +39,9 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                         print(move)
                         return(move)
                             
-                    dist.append(tup(tot, horz, vert))       
+                    dist.append((tot, horz, vert))       
                 
-        min_dist = min(dist)
+        nearest = min(dist)
         
         
         for tot, horz, vert in nearest:
