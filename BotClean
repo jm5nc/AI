@@ -3,11 +3,11 @@
 # Head ends here
 
 def next_move(posr, posc, board):
+
     """
     The first line contains two space separated integers which indicate the current position of the bot.
 The board is indexed using Matrix Convention
 5 lines follow representing the grid. Each cell in the grid is represented by any of the following 3 characters: 'b' (ascii value 98) indicates the bot's current position, 'd' (ascii value 100) indicates a dirty cell and '-' (ascii value 45) indicates a clean cell in the grid.
-
 Note If the bot is on a dirty cell, the cell will still have 'd' on it.
 """
     
@@ -17,6 +17,7 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
     else:
         
         dist = []
+        flag = 0
         
         for i in range(len(board)):
             for j in range(len(board)):
@@ -25,26 +26,29 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                     vert = posc - j
                     tot = abs(horz) + abs(vert)
                     
+                    dist.append([tot, horz, vert])   
+                    
                     if tot == 1:  #added to try and catch the easy cases faster
                         if abs(horz) == 1:
                             if horz < 0:
-                                move = "RIGHT"
-                            else:
-                                move = "LEFT"
-                        else:
-                            if vert < 0:
                                 move = "DOWN"
                             else:
                                 move = "UP"
+                        else:
+                            if vert < 0:
+                                move = "RIGHT"
+                            else:
+                                move = "LEFT"
                         print(move)
-                        return(move)
-                            
-                    dist.append((tot, horz, vert))       
-                
-        nearest = min(dist)
+                        flag = 1
+                        break    
         
         
-        for tot, horz, vert in nearest:
+        if flag == 0:
+            nearest = sorted(dist)[0]
+            tot = nearest[0]
+            horz = nearest[1]
+            vert = nearest[2]
             
             if abs(horz) <= abs(vert) and horz != 0:
                 if horz < 0:
@@ -54,16 +58,14 @@ Note If the bot is on a dirty cell, the cell will still have 'd' on it.
                     
             else:
                 if vert < 0:
-                    move = "LEFT"
-                elif vert > 0:
                     move = "RIGHT"
+                elif vert > 0:
+                    move = "LEFT"
                 else:
                     move = "Didn't I already tell you to clean?"
                     
-        print(move)
-        return(move)
+            print(move)
                     
-        
 
 # Tail starts here
 
